@@ -15,16 +15,16 @@ public class Pascal {
       triangle[i][0] = 1;
       triangle[i][i] = 1;
 
-      for (int ii = 1; ii < i; ii++) {
-        triangle[i][ii] = triangle[i - 1][ii - 1] + triangle[i - 1][ii];
+      for (int j = 1; j < i; j++) {
+        triangle[i][j] = triangle[i - 1][j - 1] + triangle[i - 1][j];
       }
     }
   }
 
   public void print() {
     for (int i = 0; i < size; i++) {
-      for (int ii = 0; ii <= i; ii++) {
-        System.out.print(triangle[i][ii] + " ");
+      for (int j = 0; j <= i; j++) {
+        System.out.print(triangle[i][j] + " ");
       }
       System.out.println();
     }

@@ -23,8 +23,8 @@ public class GenerateTheArray {
       if (i < 2) {
         flagPrime = false;
       }
-      for (int ii = 2; ii <= sqrt(i) && flagPrime; ii++) {
-        if (i % ii == 0) {
+      for (int j = 2; j <= sqrt(i) && flagPrime; j++) {
+        if (i % j == 0) {
           flagPrime = false;
           break;
         }
