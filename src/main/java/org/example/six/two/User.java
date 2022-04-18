@@ -13,15 +13,20 @@ public class User {
         this("someone", null);
     }
 
-    class Query {
-        protected void printToLog(final String login) {
-            System.out.printf("Пользователь с именем %s уже существует! \n", login);
-        }
+    public interface Query {
+        void printToLog();
     }
 
-    private Query query = new Query();
+    public Query createQuery() {
+        class QueryImpls implements Query {
+            private final String login = User.this.login;
+            private final String password = User.this.password;
 
-    public void createQuery() {
-        query.printToLog(this.login);
+            @Override
+            public void printToLog() {
+                System.out.printf("Пользователь с именем %s уже существует! \n", login);
+            }
+        }
+        return new QueryImpls();
     }
 }
