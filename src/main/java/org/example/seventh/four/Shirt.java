@@ -6,7 +6,7 @@ public class Shirt {
     private String color;
     private String size;
 
-    public Shirt(final String inputShirt) {
+    public Shirt(final String inputShirt) throws ShirtException {
         if (inputShirt == null || inputShirt.isEmpty()) {
             throw new ShirtException("Incorrect input!", inputShirt);
         }

@@ -1,50 +1,38 @@
 package org.example.seventh.two;
 
+import java.util.Locale;
+
 public class Person {
-  private String name;
   private String surname;
+  private String name;
   private String patronymic;
 
-  public Person(
-      final String name,
-      final String surname,
-      final String patronymic
-  ) {
-    this.name = name;
-    this.surname = surname;
-    this.patronymic = patronymic;
-  }
-
-  public Person(final String surname) {
-    this(null, surname, null);
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public String getSurname() {
-    return surname;
-  }
-
-  public void setSurname(String surname) {
-    this.surname = surname;
-  }
-
-  public String getPatronymic() {
-    return patronymic;
-  }
-
-  public void setPatronymic(String patronymic) {
-    this.patronymic = patronymic;
+  public Person(String input) {
+    final String[] array = input.split(" ");
+    if (array.length > 0 && array.length < 4) {
+      this.surname = array[0].substring(0, 1).toUpperCase(Locale.ROOT) + array[0].toLowerCase(Locale.ROOT).substring(1);
+      if (array.length == 3) {
+        this.name = array[1];
+        this.patronymic = array[2];
+      } else {
+        this.name = null;
+        this.patronymic = null;
+      }
+    } else {
+      throw new RuntimeException("Incorrect input: " + input);
+    }
   }
 
   public String getFullName() {
-    // todo: task - ?
-    return String.format("%s %s %s", surname, name, patronymic);
+    String fullName = this.surname;
+    if (this.name != null && this.patronymic != null) {
+      return String.format(
+          "%s %s. %s.",
+          fullName,
+          this.name.substring(0, 1).toUpperCase(Locale.ROOT),
+          this.patronymic.substring(0, 1).toUpperCase(Locale.ROOT)
+      );
+    }
+    return fullName;
   }
 }
