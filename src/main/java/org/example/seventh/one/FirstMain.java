@@ -7,7 +7,18 @@ public class FirstMain {
       "1, Кто-то, Кто-тов, ПМИб, 17",
       "1, Никто, Никтотов, ПМИб, 2",
   };
+
+  private static String createQuery(final TStudent student) {
+    return String.format(
+        "insert into T_GroupSelected values ('%s', '%s', '%s', '%s');",
+        student.getStudentId(),
+        student.getFirstName(),
+        student.getLastName(),
+        student.getGroupId()
+        );
+  }
   public static void main(String[] args) {
+
     final int allowedDebts = 7;
     final TStudent[] students = new TStudent[queries.length];
     for (int i = 0; i < queries.length; i++) {
@@ -17,20 +28,10 @@ public class FirstMain {
         re.printStackTrace();
       }
     }
-    final TGroup[] groups = new TGroup[students.length];
     for (int i = 0; i < students.length; i++) {
       if (students[i].getNumberOfDebt() > allowedDebts) {
-        groups[i] = new TGroup(
-            students[i].getStudentId(),
-            students[i].getFirstName(),
-            students[i].getLastName(),
-            students[i].getGroupId()
-        );
+        System.out.println(createQuery(students[i]));
       }
-    }
-    System.out.println("Должники:\n");
-    for (int i = 0; i < students.length; i++) {
-      System.out.println(groups[i]);
     }
   }
 }
